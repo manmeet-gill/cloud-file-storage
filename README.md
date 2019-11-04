@@ -1,7 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cloud-Photo-Album-Storage Application
+    
+### Front-End
+    React JS
+### Back-End
+    AWS - serverless
+### API
+    GraphQL
+
 
 ## Live Demo
-    https://d16rk8ket78in4.cloudfront.net 
+[a link](https://d16rk8ket78in4.cloudfront.net) 
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,60 +19,67 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Build instructions
+After checking out this code, you'll need to run the following commands to get this app to work.
+**In your terminal, from within the same directory as this README, perform these steps:**
 
-### `npm test`
+### 1. Initialize Amplify
+Run: `amplify init`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Answer the questions like this:
+- Choose your default editor: `<anything you want>`
+- Choose the type of app that you're building `javascript
+- Please tell us about your project
+- What javascript framework are you using `react`
+- Source Directory Path:  `src`
+- Distribution Directory Path: `build`
+- Build Command:  `npm run-script build`
+- Start Command: `npm run-script start`
+- Do you want to use an AWS profile? `<either answer is fine, it's up to you>`
 
-### `npm run build`
+Wait for `amplify init` to finish
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Add authentication
+Run: `amplify auth add`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Answer the questions like this:
+-  Do you want to use the default authentication and security configuration? `Yes, use the default configuration.`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run `amplify push`, Press `Enter/Return` to continue, and wait for it to finish
 
-### `npm run eject`
+### 3. Add a GraphQL API
+Run: `amplify api add`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Answer the questions like this:
+- Please select from one of the below mentioned services `GraphQL`
+- Provide API name: `<whatever you want -- I suggest 'photoAlbumsDemo'>`
+- Choose an authorization type for the API `Amazon Cognito User Pool`
+- Do you have an annotated GraphQL schema? `Yes`
+- Provide your schema file path: `scripts/bootstrapping/schema.graphql`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Run `amplify push`, Press `Enter/Return` to continue, and wait for it to finish
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 4. Add S3 file storage
+Run: `amplify storage add`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Answer the questions like this:
+- Please select from one of the below mentioned services `Content (Images, audio, video, etc.)`
+- Please provide a friendly name for your resource that will be used to label this category in the project: `photostorage`
+- Please provide bucket name: `<accept the default value>`
+- Who should have access: `Auth users only`
+- What kind of access do you want for Authenticated users `read/write`
 
-## Learn More
+Run `amplify push`, Press `Enter/Return` to continue, and wait for it to finish
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 5. Publish the app to the CloudFront CDN
+Run `amplify hosting add`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Answer the questions like this:
+- Select the environment setup: `PROD (S3 with CloudFront using HTTPS)`
+- hosting bucket name `<accept the default>`
+- index doc for the website `index.html`
+- error doc for the website `index.html`
 
-### Code Splitting
+Run `amplify push`, Press `Enter/Return` to continue, and wait for it to finish
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Run `amplify publish` and wait for it to finish
