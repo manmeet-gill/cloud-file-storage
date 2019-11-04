@@ -1,5 +1,8 @@
 # Cloud-Photo-Album-Storage Application
-    
+
+## Live Demo
+[https://d16rk8ket78in4.cloudfront.net](https://d16rk8ket78in4.cloudfront.net) 
+
 ### Front-End
     React JS
 ### Back-End
@@ -7,9 +10,6 @@
 ### API
     GraphQL
 
-
-## Live Demo
-[a link](https://d16rk8ket78in4.cloudfront.net) 
 ## Available Scripts
 
 In the project directory, you can run:
